@@ -17,7 +17,7 @@ function App() {
   const audioRef = useRef(null)
   const [musica, SetMusica] = useState(0)
   const [tocando, SetTocando] = useState(false)
-  const [repetir, SetRepetir] = useState('desativado')
+  const [repetir, SetRepetir] = useState(false)
   const [curtida, SetCurtida] = useState(false)
   const [tempoAtual, setTempoAtual] = useState(0)
 
@@ -118,12 +118,10 @@ function App() {
   }, [musica])
 
   function Repetição() {
-    if (repetir === 'desativado') {
-      SetRepetir('ativado1')
-    } else if (repetir === 'ativado1') {
-      SetRepetir('ativadoLoop')
-    } else {
-      SetRepetir('desativado')
+    if (repetir === false) {
+      SetRepetir(true) 
+  } else {
+      SetRepetir(false)
     }
   }
 
@@ -138,13 +136,21 @@ function App() {
     const audio = audioRef.current
     if (!audio) return
 
-    function atualizarTempo() {
-      setTempoAtual(audio.currentTime)
+    function aoTerminar() {
+      if (repetir === true) {
+        audio.currentTime = 0
+        audio.play()
+      } else {
+        Proxima()
+        setTimeout(() => {
+          audio.play()
+        }, 100)
+      }
     }
 
-    audio.addEventListener('timeupdate', atualizarTempo)
-    return () => audio.removeEventListener('timeupdate', atualizarTempo)
-  }, [])
+    audio.addEventListener('ended', aoTerminar)
+    return () => audio.removeEventListener('ended', aoTerminar)
+  }, [musica, repetir])
 
   return (
     <section className="flex flex-col gap-6 justify-center items-center min-h-screen bg-gradient-to-r from-[#0f0c29] via-[#302b63] to-[#24243e]">
@@ -156,13 +162,18 @@ function App() {
 
       {/* titulo e outras coisa */}
       <div className="flex justify-center items-center gap-10">
-        <div onClick={gostei}>{curtida ? <FaHeart /> : <FaRegHeart />}</div>
-        <div>
-          <h2>{atual.name}</h2>
-          <h3>{atual.autor}</h3>
+        <div
+          className="transition-colors duration-300 cursor-pointer hover:text-[#a044ff]"
+          onClick={gostei}
+        >
+          {curtida ? <FaHeart className='text-4xl text-[#a044ff]'/> : <FaRegHeart className='text-4xl' />}
         </div>
         <div>
-          <FaMusic />
+          <h2 className='text-3xl font-bold bg-gradient-to-r bg-clip-text text-transparent from-[#6a3093] to-[#a044ff]'>{atual.name}</h2>
+          <h3 className='text-2xl font-semibold bg-gradient-to-r bg-clip-text text-transparent from-[#6a3093] to-[#a044ff]'>{atual.autor}</h3>
+        </div>
+        <div>
+          <FaMusic className='text-4xl text-[#a044ff]'/>
         </div>
       </div>
 
@@ -181,22 +192,22 @@ function App() {
       {/* botoes */}
       <div className="flex justify-center items-center gap-10">
         <div onClick={Anterior}>
-          <FaBackward className="text-3xl" />
+          <FaBackward className="text-4xl transition-colors duration-300 hover:text-[#a044ff] hover:active:scale-95" />
         </div>
         <div onClick={tocarOuPausar}>
           {!tocando ? (
-            <FaPlay className="bg-slate-200 rounded-full text-5xl p-3.5 fpnr" />
+            <FaPlay className="  text-4xl transition-colors duration-300 hover:text-[#a044ff] hover:active:scale-95" />
           ) : (
-            <FaPause className="bg-slate-200 rounded-full text-3xl p-3.5" />
+            <FaPause className="  text-4xl transition-colors duration-300 hover:text-[#a044ff] hover:active:scale-95" />
           )}
         </div>
 
         <div onClick={Proxima}>
-          <FaForward className="text-3xl" />
+          <FaForward className="text-4xl transition-colors duration-300 hover:text-[#a044ff] hover:active:scale-95" />
         </div>
 
         <div onClick={Repetição}>
-          <FaRedoAlt className="text-3xl" />
+          <FaRedoAlt className="text-4xl transition-colors duration-300 hover:text-[#a044ff] hover:active:scale-95" />
         </div>
       </div>
     </section>
