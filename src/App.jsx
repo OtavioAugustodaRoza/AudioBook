@@ -12,6 +12,12 @@ import {
   FaVolumeMute,
 } from 'react-icons/fa'
 
+
+// fazer resposividade dps
+
+
+
+
 function App() {
   const audioRef = useRef(null)
   const [musica, SetMusica] = useState(0)
@@ -61,7 +67,7 @@ function App() {
   ])
 
   const atual = songs[musica]
-  
+
   const likesArray = songs.map(song => song.like)
   localStorage.setItem('likes', JSON.stringify(likesArray))
 
