@@ -1,16 +1,42 @@
-# React + Vite
+<h1 align="center">
+  <img src="https://cdn-icons-png.flaticon.com/512/727/727245.png" width="40"/>
+  <br/>
+  Music Player 
+</h1>
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+<p align="center">
+  Um <b>player de música moderno e responsivo</b> feito com <b>React</b>, <b>Tailwind CSS</b>, <b>HTML</b> e <b>JavaScript</b>.
+</p>
+<p align="center">
+ <b> feito com objetivo de aprimorar minhas habilidades em react </b>
+</p> 
 
-Currently, two official plugins are available:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+<p align="center">
+  <img src="https://img.shields.io/badge/React-18.0.0-61DAFB?logo=react&style=for-the-badge" />
+  <img src="https://img.shields.io/badge/TailwindCSS-3.0-38BDF8?logo=tailwindcss&style=for-the-badge" />
+  <img src="https://img.shields.io/badge/JavaScript-ES6+-F7DF1E?logo=javascript&style=for-the-badge" />
+</p>
 
-## React Compiler
+---
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+##  Funcionalidades
 
-## Expanding the ESLint configuration
+- 🎵 Tocar, pausar e trocar faixas  
+- 🎚️ Controle de volume  
+- ⏩ Avançar e retroceder música  
+- 🕓 Barra de progresso dinâmica  
+- 🖼️ Capa, título e artista da música  
+- 📱 Layout totalmente responsivo com Tailwind  
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+---
+
+##  Tecnologias Utilizadas
+
+| Tecnologia | Descrição |
+|-------------|------------|
+| <img src="https://cdn.worldvectorlogo.com/logos/react-2.svg" width="25"/> **React.js** | Biblioteca principal para criar a interface |
+| <img src="https://cdn.worldvectorlogo.com/logos/tailwindcss.svg" width="25"/> **Tailwind CSS** | Estilização moderna e responsiva |
+| <img src="https://cdn.worldvectorlogo.com/logos/javascript-1.svg" width="25"/> **JavaScript (ES6+)** | Lógica e controle de áudio |
+| <img src="https://cdn.worldvectorlogo.com/logos/html-1.svg" width="25"/> **HTML5** | Estrutura semântica do site |
+
