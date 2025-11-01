@@ -1,4 +1,3 @@
-// App.js
 import { useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Nav from "./componets/nav";
@@ -11,11 +10,10 @@ export default function App() {
 
   return (
     <BrowserRouter>
-      <div className= {`flex min-h-screen  ${bgColor}`}>
-        <nav className="w-64 p-4">
-          <Nav Mode={Mode} setChangeMode={setChangeMode} />
-        </nav>
-        <main className="flex flex-1 justify-center items-center">
+      <div className={`flex flex-col md:flex-row min-h-screen ${bgColor}`}>
+        <Nav Mode={Mode} setChangeMode={setChangeMode} />
+
+        <main className="flex flex-1 justify-center items-center pb-16 md:pb-0">
           <Routes>
             <Route path="/" element={<Home Mode={Mode} setChangeMode={setChangeMode} />} />
             <Route path="/player" element={<Player Mode={Mode} setChangeMode={setChangeMode} />} />

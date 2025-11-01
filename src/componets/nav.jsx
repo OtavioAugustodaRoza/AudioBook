@@ -6,8 +6,9 @@ function Nav({ Mode, setChangeMode }) {
   const [active, setActive] = useState("home");
 
   function changeMode() {
-    setChangeMode(!Mode); 
+    setChangeMode(!Mode);
   }
+
   const navItems = [
     { name: "Home", icon: <Home size={24} />, key: "home" },
     { name: "Explore", icon: <Compass size={24} />, key: "explore" },
@@ -21,38 +22,67 @@ function Nav({ Mode, setChangeMode }) {
   const borderColor = Mode ? "border-gray-400" : "border-gray-900";
 
   return (
-    <header
-      className={`w-[250px] fixed left-0 top-0 min-h-screen flex flex-col gap-1 justify-around py-6 px-4 transition-colors duration-300 border-r ${borderColor} ${bgColor}`}
-    >
-      <div className="text-3xl font-bold mb-4 text-center">
-        My<span className={`${spanColor}`}>Player</span>
-      </div>
+    <>
+      {/* NAVIGATION DESKTOP */}
+      <header
+        className={`hidden md:flex w-[250px] fixed left-0 top-0 min-h-screen flex-col gap-1 justify-around py-6 px-4 transition-colors duration-300 border-r ${borderColor} ${bgColor}`}
+      >
+        <div className="text-3xl font-bold mb-4 text-center">
+          My<span className={`${spanColor}`}>Player</span>
+        </div>
 
-      <nav className="flex flex-col gap-4">
+        <nav className="flex flex-col gap-4">
+          {navItems.map((item) => (
+            <button
+              key={item.key}
+              onClick={() => setActive(item.key)}
+              className={`flex items-center gap-3 px-3 py-2 rounded transition-colors duration-200 ${hoverColor} ${
+                active === item.key ? activeColor : ""
+              }`}
+            >
+              {item.icon}
+              <span className="text-lg">{item.name}</span>
+            </button>
+          ))}
+        </nav>
+
+        <button
+          onClick={changeMode}
+          className={`flex items-center gap-3 px-3 py-2 rounded transition-colors duration-200 ${hoverColor}`}
+        >
+          <Settings size={24} />
+          <span className="text-lg">
+            {Mode ? "Modo Claro" : "Modo Escuro"}
+          </span>
+        </button>
+      </header>
+
+      {/* NAVIGATION MOBILE */}
+      <nav
+        className={`md:hidden fixed bottom-0 left-0 w-full flex justify-around items-center py-3 border-t ${borderColor} ${bgColor} z-50`}
+      >
         {navItems.map((item) => (
           <button
             key={item.key}
             onClick={() => setActive(item.key)}
-            className={`flex items-center gap-3 px-3 py-2 rounded transition-colors duration-200 ${hoverColor} ${
+            className={`flex flex-col items-center justify-center transition-colors duration-200 ${hoverColor} ${
               active === item.key ? activeColor : ""
-            }`}
+            } p-2 rounded-lg`}
           >
             {item.icon}
-            <span className="text-lg">{item.name}</span>
+            <span className="text-sm mt-1">{item.name}</span>
           </button>
         ))}
-      </nav>
 
-      <button
-        onClick={changeMode}
-        className={`flex items-center gap-3 px-3 py-2 rounded transition-colors duration-200 ${hoverColor}`}
-      >
-        <Settings size={24} />
-        <span className="text-lg">
-          {Mode ? "Modo Claro" : "Modo Escuro"}
-        </span>
-      </button>
-    </header>
+        <button
+          onClick={changeMode}
+          className={`flex flex-col items-center justify-center transition-colors duration-200 ${hoverColor} p-2 rounded-lg`}
+        >
+          <Settings size={22} />
+          <span className="text-sm mt-1">{Mode ? "Claro" : "Escuro"}</span>
+        </button>
+      </nav>
+    </>
   );
 }
 
