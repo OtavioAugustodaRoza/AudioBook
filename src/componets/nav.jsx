@@ -1,18 +1,20 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Home, Compass, Settings } from "lucide-react";
 import { FaHeart } from "react-icons/fa";
 
 function Nav({ Mode, setChangeMode }) {
   const [active, setActive] = useState("home");
+  const navigate = useNavigate();
 
   function changeMode() {
     setChangeMode(!Mode);
   }
 
   const navItems = [
-    { name: "Home", icon: <Home size={24} />, key: "home" },
-    { name: "Explore", icon: <Compass size={24} />, key: "explore" },
-    { name: "Curtidas", icon: <FaHeart size={24} />, key: "create" },
+    { name: "Home", icon: <Home size={24} />, key: "home", path: "/" },
+    { name: "Explore", icon: <Compass size={24} />, key: "explore", path: "/" },
+    { name: "Curtidas", icon: <FaHeart size={24} />, key: "player", path: "/player" },
   ];
 
   const bgColor = Mode ? "bg-gray-950 text-white" : "bg-gray-200 text-purple-900";
@@ -35,7 +37,10 @@ function Nav({ Mode, setChangeMode }) {
           {navItems.map((item) => (
             <button
               key={item.key}
-              onClick={() => setActive(item.key)}
+              onClick={() => {
+                setActive(item.key);
+                navigate(item.path);
+              }}
               className={`flex items-center gap-3 px-3 py-2 rounded transition-colors duration-200 ${hoverColor} ${
                 active === item.key ? activeColor : ""
               }`}
@@ -51,9 +56,7 @@ function Nav({ Mode, setChangeMode }) {
           className={`flex items-center gap-3 px-3 py-2 rounded transition-colors duration-200 ${hoverColor}`}
         >
           <Settings size={24} />
-          <span className="text-lg">
-            {Mode ? "Modo Claro" : "Modo Escuro"}
-          </span>
+          <span className="text-lg">{Mode ? "Modo Claro" : "Modo Escuro"}</span>
         </button>
       </header>
 
@@ -64,7 +67,10 @@ function Nav({ Mode, setChangeMode }) {
         {navItems.map((item) => (
           <button
             key={item.key}
-            onClick={() => setActive(item.key)}
+            onClick={() => {
+              setActive(item.key);
+              navigate(item.path);
+            }}
             className={`flex flex-col items-center justify-center transition-colors duration-200 ${hoverColor} ${
               active === item.key ? activeColor : ""
             } p-2 rounded-lg`}
